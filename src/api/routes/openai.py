@@ -33,6 +33,7 @@ class OpenAI(API):
             if image:
                 image_data = await image.read()
                 image_decode = base64.b64encode(image_data).decode('utf-8')
+
                 content.append({
                     "type": "image_url",
                     "image_url": f"data:image/jpeg;base64,{image_decode}"
