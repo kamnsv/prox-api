@@ -15,7 +15,7 @@ class OpenAI(API):
                          image: UploadFile=None,
                          max_tokens: int=Query(3_000, ge=1, lt=16_384), 
                          model:str=Query('gpt-4o', enum=['gpt-4o', 'gpt-4o-mini', 'gpt-o1']),
-                         ) -> str:
+                         ) -> dict:
             
             headers = {
                 "Content-Type": "application/json",
@@ -39,7 +39,7 @@ class OpenAI(API):
 
                 content.append({
                     "type": "image_url",
-                    "image_url": f"data:{image.content_type};base64,{image_base64}"
+                    "image_url": {'url': f"data:{image.content_type};base64,{image_base64}"}
                 })
             
             if not len(content):
@@ -57,5 +57,5 @@ class OpenAI(API):
             }
 
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-            result = response.text
+            result = response.json()
             return result
