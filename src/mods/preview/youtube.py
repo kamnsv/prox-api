@@ -7,12 +7,15 @@ class PrevYoutube(Previewer):
     def __str__(self):
         return 'youtube'
     
-    def download_video(self, url_video: str, out_path: str):
+    def download_video(self, url_video: str, out_path: str, cookies:str):
         ydl_opts = {
             'format': 'bestvideo[ext=mp4]',
             'outtmpl': out_path,
             'quiet': True,
         }
+        if cookies:
+            ydl.update({'cookiesfrombrowser': ("chrome", cookies)})
+
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url_video])
 

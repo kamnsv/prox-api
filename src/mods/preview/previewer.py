@@ -20,7 +20,7 @@ class Previewer(ABC):
     def __str__(self):
         ...
 
-    def create(self, video_url: str, n_parts=5, k_seconds=3, width=640, height=320):
+    def create(self, video_url: str, cookies: str, n_parts=5, k_seconds=3, width=640, height=320):
 
         os.makedirs(self.cache_preview + os.sep + str(self))
         os.makedirs(self.download_path + os.sep + str(self))
@@ -34,7 +34,7 @@ class Previewer(ABC):
             if not os.path.isfile(self.target): 
                 remove_old(self.cache_preview, self.max_save['prev'])
                 remove_old(self.download_path, self.max_save['download'])
-                self.download_video(video_url, self.src)
+                self.download_video(video_url, self.src, cookies)
         
             self.split_and_preview(self.src, n_parts, k_seconds, self.target, width, height)
     
@@ -43,7 +43,7 @@ class Previewer(ABC):
         ...
 
     @abstractmethod
-    def download_video(self, url_video: str, out_path: str):
+    def download_video(self, url_video: str, out_path: str, cookies: str=''):
         ...
     
     def split_and_preview(self, video_path, output_path:int, n_parts: int, k_seconds: int, width:int=640, height:int=320, audio=False):
