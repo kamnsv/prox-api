@@ -7,8 +7,6 @@ from ...mods import PrevYoutube
 
 class Previewer(API):
 
-
-
     def set_routes(self, api: APIRouter):
 
         @api.post('')
