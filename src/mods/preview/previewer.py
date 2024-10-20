@@ -13,17 +13,14 @@ class Previewer(ABC):
     download_path = '/data/video_src'
     max_save = {"prev": 1000, "download": 100}
 
-    os.makedirs(cache_preview)
-    os.makedirs(download_path)
-
     @abstractmethod
     def __str__(self):
         ...
 
     def create(self, video_url: str, cookies: str, n_parts=5, k_seconds=3, width=640, height=320):
 
-        os.makedirs(self.cache_preview + os.sep + str(self))
-        os.makedirs(self.download_path + os.sep + str(self))
+        os.makedirs(self.cache_preview + os.sep + str(self), exist_ok=True)
+        os.makedirs(self.download_path + os.sep + str(self), exist_ok=True)
 
         self.name = self.extract_name(video_url)
         self.target = os.path.join(self.cache_preview, str(self), f'{self.name}__{width}x{height}_{n_parts:02}_{k_seconds:02}.webm')
