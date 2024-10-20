@@ -3,3 +3,5 @@ uvicorn
 youtube-search-python
 requests
 python-multipart
+yt_dlp
+moviepy
