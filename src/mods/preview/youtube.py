@@ -14,7 +14,7 @@ class PrevYoutube(Previewer):
             'quiet': True,
         }
         if cookies:
-            ydl.update({'cookiesfrombrowser': ("chrome", cookies)})
+            ydl_opts.update({'cookiesfrombrowser': ("chrome", cookies)})
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             ydl.download([url_video])
