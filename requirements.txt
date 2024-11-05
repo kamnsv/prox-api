@@ -5,3 +5,6 @@ requests
 python-multipart
 yt_dlp
 moviepy
+pycryptodome
+keyring
+pypiwin32; platform_system == "Windows"
